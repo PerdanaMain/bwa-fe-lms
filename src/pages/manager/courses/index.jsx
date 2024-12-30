@@ -20,7 +20,7 @@ const ManageCoursePage = () => {
             Import File
           </Link>
           <Link
-            to="create-new-course.html"
+            to="/manager/courses/create"
             className="w-fit rounded-full p-[14px_20px] font-semibold text-[#FFFFFF] bg-[#662FFF] text-nowrap"
           >
             New Course
