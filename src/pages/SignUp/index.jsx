@@ -1,7 +1,11 @@
-import Form from "./form";
+// import Form from "./form";
+import Pricing from "./pricing";
 
 const SignUpPage = () => {
-  return <Form />;
+  return (
+    // <Form />
+    <Pricing />
+  );
 };
 
 export default SignUpPage;
