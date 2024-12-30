@@ -1,14 +1,15 @@
 import { createBrowserRouter } from "react-router-dom";
-import ManagerHome from "../pages/ManagerHome";
+import ManagerHomePage from "../pages/manager/home";
 import SignInPage from "../pages/SignIn";
 import SignUpPage from "../pages/SignUp";
 import SuccessCheckoutPage from "../pages/SuccessCheckout";
 import LayoutDashboard from "../components/layout";
+import ManageCoursePage from "../pages/manager/courses";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <ManagerHome />,
+    element: <ManagerHomePage />,
   },
   {
     path: "/manager/sign-in",
@@ -28,7 +29,11 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <ManagerHome />,
+        element: <ManagerHomePage />,
+      },
+      {
+        path: "/manager/courses",
+        element: <ManageCoursePage />,
       },
     ],
   },

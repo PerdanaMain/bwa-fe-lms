@@ -16,7 +16,7 @@ const Sidebar = () => {
               <Link to="#">
                 <div className="flex items-center gap-3 w-full rounded-full border p-[14px_20px] transition-all duration-300 hover:bg-[#662FFF] hover:border-[#8661EE] hover:shadow-[-10px_-6px_10px_0_#7F33FF_inset] bg-[#662FFF] border-[#8661EE] shadow-[-10px_-6px_10px_0_#7F33FF_inset]">
                   <img
-                    src="assets/images/icons/3dcube-white.svg"
+                    src="/assets/images/icons/3dcube-white.svg"
                     className="w-6 h-6"
                     alt="icon"
                   />
@@ -28,7 +28,7 @@ const Sidebar = () => {
               <Link to="#">
                 <div className="flex items-center gap-3 w-full rounded-full border p-[14px_20px] transition-all duration-300 hover:bg-[#662FFF] hover:border-[#8661EE] hover:shadow-[-10px_-6px_10px_0_#7F33FF_inset] bg-[#070B24] border-[#24283E] shadow-[-10px_-6px_10px_0_#181A35_inset]">
                   <img
-                    src="assets/images/icons/note-favorite-white.svg"
+                    src="/assets/images/icons/note-favorite-white.svg"
                     className="w-6 h-6"
                     alt="icon"
                   />
@@ -40,7 +40,7 @@ const Sidebar = () => {
               <Link to="#">
                 <div className="flex items-center gap-3 w-full rounded-full border p-[14px_20px] transition-all duration-300 hover:bg-[#662FFF] hover:border-[#8661EE] hover:shadow-[-10px_-6px_10px_0_#7F33FF_inset] bg-[#070B24] border-[#24283E] shadow-[-10px_-6px_10px_0_#181A35_inset]">
                   <img
-                    src="assets/images/icons/crown-white.svg"
+                    src="/assets/images/icons/crown-white.svg"
                     className="w-6 h-6"
                     alt="icon"
                   />
@@ -52,7 +52,7 @@ const Sidebar = () => {
               <Link to="#">
                 <div className="flex items-center gap-3 w-full rounded-full border p-[14px_20px] transition-all duration-300 hover:bg-[#662FFF] hover:border-[#8661EE] hover:shadow-[-10px_-6px_10px_0_#7F33FF_inset] bg-[#070B24] border-[#24283E] shadow-[-10px_-6px_10px_0_#181A35_inset]">
                   <img
-                    src="assets/images/icons/profile-2user-white.svg"
+                    src="/assets/images/icons/profile-2user-white.svg"
                     className="w-6 h-6"
                     alt="icon"
                   />
@@ -69,7 +69,7 @@ const Sidebar = () => {
               <Link to="#">
                 <div className="flex items-center gap-3 w-full rounded-full border p-[14px_20px] transition-all duration-300 hover:bg-[#662FFF] hover:border-[#8661EE] hover:shadow-[-10px_-6px_10px_0_#7F33FF_inset] bg-[#070B24] border-[#24283E] shadow-[-10px_-6px_10px_0_#181A35_inset]">
                   <img
-                    src="assets/images/icons/security-card-white.svg"
+                    src="/assets/images/icons/security-card-white.svg"
                     className="w-6 h-6"
                     alt="icon"
                   />
@@ -81,7 +81,7 @@ const Sidebar = () => {
               <Link to="#">
                 <div className="flex items-center gap-3 w-full rounded-full border p-[14px_20px] transition-all duration-300 hover:bg-[#662FFF] hover:border-[#8661EE] hover:shadow-[-10px_-6px_10px_0_#7F33FF_inset] bg-[#070B24] border-[#24283E] shadow-[-10px_-6px_10px_0_#181A35_inset]">
                   <img
-                    src="assets/images/icons/cup-white.svg"
+                    src="/assets/images/icons/cup-white.svg"
                     className="w-6 h-6"
                     alt="icon"
                   />
@@ -93,7 +93,7 @@ const Sidebar = () => {
               <Link to="#">
                 <div className="flex items-center gap-3 w-full rounded-full border p-[14px_20px] transition-all duration-300 hover:bg-[#662FFF] hover:border-[#8661EE] hover:shadow-[-10px_-6px_10px_0_#7F33FF_inset] bg-[#070B24] border-[#24283E] shadow-[-10px_-6px_10px_0_#181A35_inset]">
                   <img
-                    src="assets/images/icons/setting-2-white.svg"
+                    src="/assets/images/icons/setting-2-white.svg"
                     className="w-6 h-6"
                     alt="icon"
                   />
@@ -105,7 +105,7 @@ const Sidebar = () => {
         </nav>
       </div>
       <img
-        src="assets/images/backgrounds/sidebar-glow.png"
+        src="/assets/images/backgrounds/sidebar-glow.png"
         className="absolute object-contain object-bottom bottom-0"
         alt="background"
       />
