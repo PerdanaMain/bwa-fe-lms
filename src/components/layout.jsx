@@ -4,12 +4,12 @@ import Sidebar from "./sidebar";
 import PropTypes from "prop-types";
 
 const LayoutDashboard = ({ isAdmin = true }) => {
-  const isPreviewPage = useMatch("/manager/courses/:id/preview");
-  console.log("isPreviewPage", isPreviewPage);
+  const isManagerPreviewPage = useMatch("/manager/courses/:id/preview");
+  const isStudentPreviewPage = useMatch("/student/detail-course/:id");
 
   return (
     <>
-      {isPreviewPage !== null ? (
+      {isManagerPreviewPage !== null || isStudentPreviewPage !== null ? (
         <Outlet />
       ) : (
         <div className="flex min-h-screen">
