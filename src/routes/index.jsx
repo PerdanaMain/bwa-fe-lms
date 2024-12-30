@@ -10,6 +10,7 @@ import ManageCourseDetailPage from "../pages/manager/course-detail";
 import ManageContentCreatePage from "../pages/manager/course-content-create";
 import ManageCoursePreviewPage from "../pages/manager/course-preview";
 import ManageStudentsPage from "../pages/manager/students";
+import StudentPage from "../pages/student";
 
 const router = createBrowserRouter([
   {
@@ -29,7 +30,7 @@ const router = createBrowserRouter([
     element: <SuccessCheckoutPage />,
   },
   {
-    path: "/manager/",
+    path: "/manager",
     element: <LayoutDashboard />,
     children: [
       {
@@ -59,6 +60,16 @@ const router = createBrowserRouter([
       {
         path: "/manager/students",
         element: <ManageStudentsPage />,
+      },
+    ],
+  },
+  {
+    path: "/student",
+    element: <LayoutDashboard isAdmin={false} />,
+    children: [
+      {
+        index: true,
+        element: <StudentPage />,
       },
     ],
   },
