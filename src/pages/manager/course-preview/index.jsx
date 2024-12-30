@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+import ContentText from "./content-text";
+import ContentVideo from "./content-video";
 
 const ManageCoursePreviewPage = () => {
   return (
@@ -15,7 +17,7 @@ const ManageCoursePreviewPage = () => {
             <div className="flex flex-col gap-4">
               <div className="flex shrink-0 w-[130px] h-[100px] rounded-[14px] bg-[#D9D9D9] overflow-hidden">
                 <img
-                  src="assets/images/thumbnails/th-1.png"
+                  src="/assets/images/thumbnails/th-1.png"
                   className="w-full h-full object-cover"
                   alt="thumbnail"
                 />
@@ -29,7 +31,7 @@ const ManageCoursePreviewPage = () => {
                 <Link to="course-learning-text.html">
                   <div className="flex items-center gap-3 w-full rounded-full border p-[14px_20px] transition-all duration-300 hover:bg-[#662FFF] hover:border-[#8661EE] hover:shadow-[-10px_-6px_10px_0_#7F33FF_inset] bg-[#070B24] border-[#24283E] shadow-[-10px_-6px_10px_0_#181A35_inset]">
                     <img
-                      src="assets/images/icons/note-white.svg"
+                      src="/assets/images/icons/note-white.svg"
                       className="w-6 h-6"
                       alt="icon"
                     />
@@ -43,7 +45,7 @@ const ManageCoursePreviewPage = () => {
                 <Link to="course-learning-video.html">
                   <div className="flex items-center gap-3 w-full rounded-full border p-[14px_20px] transition-all duration-300 hover:bg-[#662FFF] hover:border-[#8661EE] hover:shadow-[-10px_-6px_10px_0_#7F33FF_inset] bg-[#070B24] border-[#24283E] shadow-[-10px_-6px_10px_0_#181A35_inset]">
                     <img
-                      src="assets/images/icons/video-play-white.svg"
+                      src="/assets/images/icons/video-play-white.svg"
                       className="w-6 h-6"
                       alt="icon"
                     />
@@ -57,7 +59,7 @@ const ManageCoursePreviewPage = () => {
                 <Link to="course-learning-text.html">
                   <div className="flex items-center gap-3 w-full rounded-full border p-[14px_20px] transition-all duration-300 hover:bg-[#662FFF] hover:border-[#8661EE] hover:shadow-[-10px_-6px_10px_0_#7F33FF_inset] bg-[#662FFF] border-[#8661EE] shadow-[-10px_-6px_10px_0_#7F33FF_inset]">
                     <img
-                      src="assets/images/icons/note-white.svg"
+                      src="/assets/images/icons/note-white.svg"
                       className="w-6 h-6"
                       alt="icon"
                     />
@@ -71,7 +73,7 @@ const ManageCoursePreviewPage = () => {
                 <Link to="course-learning-text.html">
                   <div className="flex items-center gap-3 w-full rounded-full border p-[14px_20px] transition-all duration-300 hover:bg-[#662FFF] hover:border-[#8661EE] hover:shadow-[-10px_-6px_10px_0_#7F33FF_inset] bg-[#070B24] border-[#24283E] shadow-[-10px_-6px_10px_0_#181A35_inset]">
                     <img
-                      src="assets/images/icons/note-white.svg"
+                      src="/assets/images/icons/note-white.svg"
                       className="w-6 h-6"
                       alt="icon"
                     />
@@ -85,7 +87,7 @@ const ManageCoursePreviewPage = () => {
                 <Link to="course-learning-video.html">
                   <div className="flex items-center gap-3 w-full rounded-full border p-[14px_20px] transition-all duration-300 hover:bg-[#662FFF] hover:border-[#8661EE] hover:shadow-[-10px_-6px_10px_0_#7F33FF_inset] bg-[#070B24] border-[#24283E] shadow-[-10px_-6px_10px_0_#181A35_inset]">
                     <img
-                      src="assets/images/icons/video-play-white.svg"
+                      src="/assets/images/icons/video-play-white.svg"
                       className="w-6 h-6"
                       alt="icon"
                     />
@@ -99,7 +101,7 @@ const ManageCoursePreviewPage = () => {
                 <Link to="course-learning-video.html">
                   <div className="flex items-center gap-3 w-full rounded-full border p-[14px_20px] transition-all duration-300 hover:bg-[#662FFF] hover:border-[#8661EE] hover:shadow-[-10px_-6px_10px_0_#7F33FF_inset] bg-[#070B24] border-[#24283E] shadow-[-10px_-6px_10px_0_#181A35_inset]">
                     <img
-                      src="assets/images/icons/video-play-white.svg"
+                      src="/assets/images/icons/video-play-white.svg"
                       className="w-6 h-6"
                       alt="icon"
                     />
@@ -113,7 +115,7 @@ const ManageCoursePreviewPage = () => {
                 <Link to="course-learning-text.html">
                   <div className="flex items-center gap-3 w-full rounded-full border p-[14px_20px] transition-all duration-300 hover:bg-[#662FFF] hover:border-[#8661EE] hover:shadow-[-10px_-6px_10px_0_#7F33FF_inset] bg-[#070B24] border-[#24283E] shadow-[-10px_-6px_10px_0_#181A35_inset]">
                     <img
-                      src="assets/images/icons/note-white.svg"
+                      src="/assets/images/icons/note-white.svg"
                       className="w-6 h-6"
                       alt="icon"
                     />
@@ -127,7 +129,7 @@ const ManageCoursePreviewPage = () => {
                 <Link to="course-learning-video.html">
                   <div className="flex items-center gap-3 w-full rounded-full border p-[14px_20px] transition-all duration-300 hover:bg-[#662FFF] hover:border-[#8661EE] hover:shadow-[-10px_-6px_10px_0_#7F33FF_inset] bg-[#070B24] border-[#24283E] shadow-[-10px_-6px_10px_0_#181A35_inset]">
                     <img
-                      src="assets/images/icons/video-play-white.svg"
+                      src="/assets/images/icons/video-play-white.svg"
                       className="w-6 h-6"
                       alt="icon"
                     />
@@ -141,7 +143,7 @@ const ManageCoursePreviewPage = () => {
                 <Link to="course-learning-text.html">
                   <div className="flex items-center gap-3 w-full rounded-full border p-[14px_20px] transition-all duration-300 hover:bg-[#662FFF] hover:border-[#8661EE] hover:shadow-[-10px_-6px_10px_0_#7F33FF_inset] bg-[#070B24] border-[#24283E] shadow-[-10px_-6px_10px_0_#181A35_inset]">
                     <img
-                      src="assets/images/icons/note-white.svg"
+                      src="/assets/images/icons/note-white.svg"
                       className="w-6 h-6"
                       alt="icon"
                     />
@@ -155,7 +157,7 @@ const ManageCoursePreviewPage = () => {
                 <Link to="course-learning-video.html">
                   <div className="flex items-center gap-3 w-full rounded-full border p-[14px_20px] transition-all duration-300 hover:bg-[#662FFF] hover:border-[#8661EE] hover:shadow-[-10px_-6px_10px_0_#7F33FF_inset] bg-[#070B24] border-[#24283E] shadow-[-10px_-6px_10px_0_#181A35_inset]">
                     <img
-                      src="assets/images/icons/video-play-white.svg"
+                      src="/assets/images/icons/video-play-white.svg"
                       className="w-6 h-6"
                       alt="icon"
                     />
@@ -169,7 +171,7 @@ const ManageCoursePreviewPage = () => {
                 <Link to="course-learning-finished.html">
                   <div className="flex items-center gap-3 w-full rounded-full border p-[14px_20px] transition-all duration-300 hover:bg-[#662FFF] hover:border-[#8661EE] hover:shadow-[-10px_-6px_10px_0_#7F33FF_inset] bg-[#070B24] border-[#24283E] shadow-[-10px_-6px_10px_0_#181A35_inset]">
                     <img
-                      src="assets/images/icons/tick-circle-white.svg"
+                      src="/assets/images/icons/tick-circle-white.svg"
                       className="w-6 h-6"
                       alt="icon"
                     />
@@ -183,7 +185,7 @@ const ManageCoursePreviewPage = () => {
           </nav>
         </div>
         <img
-          src="assets/images/backgrounds/sidebar-glow.png"
+          src="/assets/images/backgrounds/sidebar-glow.png"
           className="absolute object-contain object-bottom bottom-0"
           alt="background"
         />
@@ -205,7 +207,7 @@ const ManageCoursePreviewPage = () => {
               placeholder="Search course, student, other file..."
             />
             <img
-              src="assets/images/icons/search-normal.svg"
+              src="/assets/images/icons/search-normal.svg"
               className="w-6 h-6"
               alt="icon"
             />
@@ -221,7 +223,7 @@ const ManageCoursePreviewPage = () => {
               className="flex shrink-0 w-[50px] h-[50px] rounded-full overflow-hidden"
             >
               <img
-                src="assets/images/photos/photo-3.png"
+                src="/assets/images/photos/photo-3.png"
                 className="w-full h-full object-cover"
                 alt="profile photos"
               />
@@ -245,127 +247,8 @@ const ManageCoursePreviewPage = () => {
           </div>
         </div>
         <div className="relative flex flex-col gap-[26px]">
-          <div className="flex flex-col gap-5 max-w-[800px] pb-[160px]">
-            <h1 className="font-bold text-[32px] leading-[48px]">
-              Pengenalan UI UX
-            </h1>
-            <article id="Content-wrapper">
-              <p>
-                Dalam artikel ini, kita akan membahas tentang Laravel, mengapa
-                framework ini dibuat, alasan mengapa belajar Laravel, keunggulan
-                utama Laravel, persiapan yang diperlukan, langkah-langkah
-                belajar Laravel, dan bagaimana menemukan mentor serta proyek
-                sampingan untuk meningkatkan keterampilan Anda.
-              </p>
-              <h3>Dasar Design Principle</h3>
-              <p>
-                Laravel adalah framework open-source untuk PHP yang dibuat oleh
-                Taylor Otwell. Framework ini dirancang untuk pengembang web yang
-                ingin bekerja dengan cara yang elegan dan menyenangkan.
-              </p>
-              <pre className="wp-block-code">
-                {"                            "}
-                <code className="hljs language-php">
-                  {/* eslint-disable-next-line react/jsx-no-comment-textnodes */}
-                  {"\n"}// DatabaseSeeder.php{"\n"}public function run(){"\n"}
-                  {"{"}
-                  {"\n"}
-                  {"    "}$this-&gt;call([{"\n"}
-                  {"        "}UsersTableSeeder::class,{"\n"}
-                  {"        "}AirlinesTableSeeder::class,{"\n"}
-                  {"        "}FlightsTableSeeder::class,{"\n"}
-                  {"    "}]);{"\n"}
-                  {"}"}
-                  {"\n"}Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Atque magnam dolore facilis deserunt dicta mollitia magni
-                  reprehenderit exercitationem dolorum repellat.{"\n"}
-                  {"                            "}
-                </code>
-                {"\n"}
-                {"                        "}
-              </pre>
-              <ul>
-                <li>
-                  <p>
-                    Autentikasi: Autentikasi pengguna adalah fitur penting dalam
-                    banyak aplikasi web. Laravel memiliki sistem autentikasi
-                    bawaan yang aman dan mudah digunakan.
-                  </p>
-                </li>
-              </ul>
-              <ul>
-                <li>
-                  <p>
-                    Caching: Untuk meningkatkan performa aplikasi, Laravel
-                    menyediakan fitur caching yang mudah dikonfigurasi dan
-                    digunakan.
-                  </p>
-                </li>
-              </ul>
-              <figure>
-                <img src="assets/images/thumbnails/th-5.png" alt="image" />
-                <figcaption />
-              </figure>
-              <p>
-                Mengamati ciri-ciri ini pada anak Anda dapat membantu Anda
-                mengenali bakat mereka dalam coding dan memberikan dukungan yang
-                tepat untuk mengembangkan kemampuan tersebut. Memberikan akses
-                ke sumber daya belajar coding yang sesuai usia, seperti platform
-                pembelajaran interaktif dan permainan edukatif, dapat membantu
-                anak Anda mengeksplorasi dan mengembangkan minat mereka dalam
-                bidang teknologi dan pemrograman.
-              </p>
-              <ul>
-                <li>
-                  <p>
-                    Autentikasi: Autentikasi pengguna adalah fitur penting dalam
-                    banyak aplikasi web. Laravel memiliki sistem autentikasi
-                    bawaan yang aman dan mudah digunakan.
-                  </p>
-                </li>
-              </ul>
-              <ul>
-                <li>
-                  <p>
-                    Caching: Untuk meningkatkan performa aplikasi, Laravel
-                    menyediakan fitur caching yang mudah dikonfigurasi dan
-                    digunakan.
-                  </p>
-                </li>
-              </ul>
-            </article>
-          </div>
-          <div className="fixed bottom-0 w-[calc(100%-400px)] h-[151px] flex items-end justify-end pb-5 bg-[linear-gradient(0deg,#FFFFFF_49.67%,rgba(255,255,255,0)_84.11%)]">
-            <button
-              type="button"
-              className="w-fit rounded-full p-[14px_20px] font-semibold text-[#FFFFFF] bg-[#662FFF] text-nowrap"
-            >
-              Mark as Completed
-            </button>
-          </div>
-
-          {/* <div className="flex shrink-0 h-[calc(100vh-110px-104px)] rounded-[20px] overflow-hidden">
-            <iframe
-              className="w-full aspect-video"
-              src="https://www.youtube.com/embed/tYyPdH32faE?si=heerM3KnIDqdfrZJ"
-              title="YouTube video player"
-              frameBorder={0}
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerPolicy="strict-origin-when-cross-origin"
-              allowFullScreen=""
-            ></iframe>
-          </div>
-          <div className="flex items-center justify-between gap-5">
-            <h1 className="font-bold text-[32px] leading-[48px]">
-              Install Figma Plugins
-            </h1>
-            <button
-              type="button"
-              className="w-fit rounded-full p-[14px_20px] font-semibold text-[#FFFFFF] bg-[#662FFF] text-nowrap"
-            >
-              Mark as Completed
-            </button>
-          </div> */}
+          <ContentText />
+          <ContentVideo />
         </div>
       </main>
     </div>
