@@ -1,3 +1,6 @@
+import { Link } from "react-router-dom";
+import Navbar from "../../components/navbar";
+
 const SignInPage = () => {
   return (
     <div className="relative flex flex-col flex-1 p-[10px]">
@@ -9,44 +12,21 @@ const SignInPage = () => {
         />
       </div>
       <nav className="flex items-center justify-between p-[30px]">
-        <div className="flex items-center gap-[60px]">
-          <img
-            src="/assets/images/logos/logo.svg"
-            className="flex shrink-0"
-            alt="logo"
-          />
-          <ul className="flex items-center gap-10">
-            <li className="font-semibold transition-all duration-300 hover:text-[#662FFF] text-white">
-              <a href="#">Home</a>
-            </li>
-            <li className="font-semibold transition-all duration-300 hover:text-[#662FFF] text-white">
-              <a href="pricing.html">Pricing</a>
-            </li>
-            <li className="font-semibold transition-all duration-300 hover:text-[#662FFF] text-white">
-              <a href="#">Features</a>
-            </li>
-            <li className="font-semibold transition-all duration-300 hover:text-[#662FFF] text-white">
-              <a href="#">Testimonials</a>
-            </li>
-          </ul>
-        </div>
+        <Navbar />
         <div className="flex items-center gap-3">
-          <a href="signin.html">
+          <Link to="#">
             <div className="flex items-center gap-3 w-fit rounded-full border p-[14px_20px] transition-all duration-300 hover:bg-[#662FFF] hover:border-[#8661EE] hover:shadow-[-10px_-6px_10px_0_#7F33FF_inset] bg-[#070B24] border-[#24283E] shadow-[-10px_-6px_10px_0_#181A35_inset]">
               <span className="font-semibold text-white">My Dashboard</span>
             </div>
-          </a>
-          <a href="signup.html">
+          </Link>
+          <Link to="/manager/sign-up">
             <div className="flex items-center gap-3 w-fit rounded-full border p-[14px_20px] transition-all duration-300 hover:bg-[#662FFF] hover:border-[#8661EE] hover:shadow-[-10px_-6px_10px_0_#7F33FF_inset] bg-[#662FFF] border-[#8661EE] shadow-[-10px_-6px_10px_0_#7F33FF_inset]">
               <span className="font-semibold text-white">Sign Up</span>
             </div>
-          </a>
+          </Link>
         </div>
       </nav>
-      <form
-        action="pricing.html"
-        className="flex flex-col w-[400px] h-fit rounded-[20px] border border-[#262A56] p-[30px] gap-[30px] bg-[#080A2A] m-auto"
-      >
+      <form className="flex flex-col w-[400px] h-fit rounded-[20px] border border-[#262A56] p-[30px] gap-[30px] bg-[#080A2A] m-auto">
         <div>
           <h1 className="font-bold text-[26px] leading-[39px] text-white">
             Welcome Back!
@@ -84,12 +64,12 @@ const SignInPage = () => {
             />
           </div>
           <div className="flex justify-end mt-[10px]">
-            <a
-              href="#"
+            <Link
+              to="#"
               className="text-sm leading-[21px] text-[#662FFF] hover:underline"
             >
               Forgot Password
-            </a>
+            </Link>
           </div>
         </div>
         <hr className="border-[#262A56]" />
