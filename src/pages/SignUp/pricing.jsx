@@ -1,7 +1,28 @@
 import { Link } from "react-router-dom";
 import Navbar from "../../components/navbar";
+import { useMutation } from "@tanstack/react-query";
+import { postSignUp } from "../../services/authService";
+
+import PropTypes from "prop-types";
 
 const Pricing = ({ data }) => {
+  console.log(data);
+
+  const { isLoading, mutateAsync } = useMutation({
+    mutationFn: () => postSignUp(data),
+  });
+
+  const submitData = async () => {
+    try {
+      if (!data) return;
+
+      const response = await mutateAsync();
+      window.location.replace(response.data.midtrans_payment_url);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <div className="relative flex flex-col flex-1 p-[10px]">
       <div className="absolute w-[calc(100%-20px)] min-h-[calc(100vh-20px)] h-[calc(100%-20px)] bg-[#060A23] -z-10 rounded-[20px]">
@@ -154,13 +175,13 @@ const Pricing = ({ data }) => {
           </div>
           <hr className="border-[#262A56]" />
           <div className="flex flex-col gap-3">
-            <Link to="midtrans.html">
+            <button type="button" onClick={submitData} disabled={isLoading}>
               <div className="flex items-center justify-center gap-3 w-full rounded-full border p-[14px_20px] transition-all duration-300 hover:bg-[#662FFF] hover:border-[#8661EE] hover:shadow-[-10px_-6px_10px_0_#7F33FF_inset] bg-[#662FFF] border-[#8661EE] shadow-[-10px_-6px_10px_0_#7F33FF_inset]">
                 <span className="font-semibold text-white">
                   Choose This Plan
                 </span>
               </div>
-            </Link>
+            </button>
             <Link to="#">
               <div className="flex items-center justify-center gap-3 w-full rounded-full border p-[14px_20px] transition-all duration-300 hover:bg-[#662FFF] hover:border-[#8661EE] hover:shadow-[-10px_-6px_10px_0_#7F33FF_inset] bg-[#070B24] border-[#24283E] shadow-[-10px_-6px_10px_0_#181A35_inset]">
                 <span className="font-semibold text-white">
@@ -175,4 +196,7 @@ const Pricing = ({ data }) => {
   );
 };
 
+Pricing.propTypes = {
+  data: PropTypes.object,
+};
 export default Pricing;
