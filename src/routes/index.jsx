@@ -15,7 +15,7 @@ import StudentPage from "../pages/student";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <ManagerHomePage />,
+    element: <SignInPage />,
   },
   {
     path: "/manager/sign-in",
