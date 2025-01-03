@@ -6,8 +6,6 @@ import { postSignUp } from "../../services/authService";
 import PropTypes from "prop-types";
 
 const Pricing = ({ data }) => {
-  console.log(data);
-
   const { isLoading, mutateAsync } = useMutation({
     mutationFn: () => postSignUp(data),
   });
