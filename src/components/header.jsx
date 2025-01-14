@@ -1,4 +1,15 @@
+import secureLocalStorage from "react-secure-storage";
+import { useNavigate } from "react-router-dom";
+import { STORAGE_KEY } from "../utils/const";
+
 const Header = () => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    secureLocalStorage.removeItem(STORAGE_KEY);
+    navigate("/manager/sign-in") ;
+  };
+
   return (
     <div id="TopBar" className="flex items-center justify-between gap-[30px]">
       <form
@@ -49,7 +60,7 @@ const Header = () => {
               <a href="#">Settings</a>
             </li>
             <li className="font-semibold">
-              <a href="signin.html">Logout</a>
+              <button type="button" onClick={handleLogout}>Logout</button>
             </li>
           </ul>
         </div>
