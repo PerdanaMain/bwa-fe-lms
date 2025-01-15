@@ -1,6 +1,8 @@
-import { Link } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import CardCourse from "./card";
 const ManageCoursePage = () => {
+  const courses = useLoaderData();
+  console.log(courses);
   return (
     <>
       <header className="flex items-center justify-between gap-[30px]">
@@ -31,9 +33,16 @@ const ManageCoursePage = () => {
         id="CourseList"
         className="flex flex-col w-full rounded-[30px] p-[30px] gap-[30px] bg-[#F8FAFB]"
       >
-        <CardCourse />
-        <CardCourse />
-        <CardCourse />
+        {courses?.data?.map((course) => (
+          <CardCourse
+            key={course._id}
+            id={course._id}
+            name={course.name}
+            imageUrl={course.thumbnail}
+            totalStudents={course.students.length}
+            category={course.category.name}
+          />
+        ))}
         {/* <div id="Pagination" className="flex items-center gap-3">
           <button
             type="button"
