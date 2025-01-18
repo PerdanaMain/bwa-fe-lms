@@ -8,3 +8,6 @@ export const getCourses = async (token) =>
       },
     })
     .then((res) => res.data);
+
+export const getCategories = async () =>
+  await apiInstance.get("/categories").then((res) => res.data);

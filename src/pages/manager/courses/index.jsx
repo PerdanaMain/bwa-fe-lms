@@ -38,11 +38,11 @@ const ManageCoursePage = () => {
             key={course._id}
             id={course._id}
             name={course.name}
-            imageUrl={course.thumbnail}
-            totalStudents={course.students.length}
+            imageUrl={course.thumbnailUrl}
+            totalStudents={course.total_students}
             category={course.category.name}
           />
-        ))}
+        ))} 
         {/* <div id="Pagination" className="flex items-center gap-3">
           <button
             type="button"

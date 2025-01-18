@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
+import { useLoaderData } from "react-router-dom"; 
 
 const ManageCreateCoursePage = () => {
+  const categories = useLoaderData();
   return (
     <>
       <header className="flex items-center justify-between gap-[30px]">
@@ -121,12 +123,14 @@ const ManageCreateCoursePage = () => {
               id="category"
               className="appearance-none outline-none w-full py-3 px-2 -mx-2 font-semibold placeholder:font-normal placeholder:text-[#838C9D] !bg-transparent"
             >
-              <option value="" hidden="">
+              <option value="" hidden>
                 Choose one category
               </option>
-              <option value="">test</option>
-              <option value="">test</option>
-              <option value="">test</option>
+              {categories?.data?.map((category) => (
+                <option value={category._id} key={category._id}>
+                  {category.name}
+                </option>
+              ))}
             </select>
             <img
               src="/assets/images/icons/arrow-down.svg"
