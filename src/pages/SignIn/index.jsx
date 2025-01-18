@@ -8,6 +8,7 @@ import { postSignIn } from "../../services/authService";
 import { useState } from "react";
 import secureLocalStorage from "react-secure-storage";
 import { STORAGE_KEY } from "../../utils/const";
+import Swal from "sweetalert2";
 
 const SignInPage = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -39,7 +40,11 @@ const SignInPage = () => {
 
       setIsLoading(false);
     } catch (error) {
-      console.log(error);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: error?.response?.data?.message,
+      });
       setIsLoading(false);
     }
   };
@@ -86,8 +91,7 @@ const SignInPage = () => {
             alt="icon"
           />
           <input
-            type="email"
-            name="email"
+            type="text"
             id="email"
             className="appearance-none outline-none !bg-transparent w-full font-semibold text-white placeholder:font-normal placeholder:text-[#6B6C7F]"
             placeholder="Write your email address"
@@ -106,7 +110,6 @@ const SignInPage = () => {
             />
             <input
               type="password"
-              name="password"
               id="password"
               className="appearance-none outline-none !bg-transparent w-full font-semibold text-white placeholder:font-normal placeholder:text-[#6B6C7F]"
               placeholder="Type your secure password"
