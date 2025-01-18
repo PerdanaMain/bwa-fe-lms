@@ -12,6 +12,15 @@ export const getCourses = async (token) =>
 export const getCategories = async () =>
   await apiInstance.get("/categories").then((res) => res.data);
 
+export const getCourseById = async (id, token) =>
+  await apiInstance
+    .get(`/courses/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then((res) => res.data);
+
 export const createCourse = async (data, token) => {
   await apiInstance
     .post("/courses", data, {

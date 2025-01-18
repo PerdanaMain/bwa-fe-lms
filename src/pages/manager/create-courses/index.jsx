@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 import secureLocalStorage from "react-secure-storage";
 
 const ManageCreateCoursePage = () => {
-  const categories = useLoaderData();
+  const data = useLoaderData();
   const session = secureLocalStorage.getItem(STORAGE_KEY);
   const token = session.token;
   const navigate = useNavigate();
@@ -200,7 +200,7 @@ const ManageCreateCoursePage = () => {
               <option value="" hidden>
                 Choose one category
               </option>
-              {categories?.data?.map((category) => (
+              {data?.categories?.data?.map((category) => (
                 <option value={category._id} key={category._id}>
                   {category.name}
                 </option>
