@@ -2,7 +2,6 @@ import { Link, useLoaderData } from "react-router-dom";
 import CardCourse from "./card";
 const ManageCoursePage = () => {
   const courses = useLoaderData();
-  console.log(courses);
   return (
     <>
       <header className="flex items-center justify-between gap-[30px]">

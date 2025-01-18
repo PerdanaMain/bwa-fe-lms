@@ -4,9 +4,20 @@ import { useLoaderData } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createCourseSchema } from "../../../utils/zodSchema";
 import { useState, useRef } from "react";
+import { useMutation } from "@tanstack/react-query";
+import { STORAGE_KEY } from "../../../utils/const";
+import { createCourse } from "../../../services/courseService";
+import { useNavigate } from "react-router-dom";
+import secureLocalStorage from "react-secure-storage";
 
 const ManageCreateCoursePage = () => {
   const categories = useLoaderData();
+  const session = secureLocalStorage.getItem(STORAGE_KEY);
+  const token = session.token;
+  const navigate = useNavigate();
+
+  const [isLoading, setIsLoading] = useState(false);
+
 
   const {
     register,
@@ -17,12 +28,33 @@ const ManageCreateCoursePage = () => {
     resolver: zodResolver(createCourseSchema),
   });
 
-  const onSubmit = handleSubmit((data) => {
-    console.log(data);
-  });
+
 
   const [file, setFile] = useState(null);
   const inputFileRef = useRef(null);
+  const {  mutateAsync } = useMutation({
+    mutationFn: (data) => createCourse(data, token),
+  });
+
+  const onSubmit = handleSubmit(async (data) => {
+    try {
+      setIsLoading(true);
+
+      const formData = new FormData();
+      formData.append("name", data.name);
+      formData.append("categoryId", data.categoryId);
+      formData.append("tagline", data.tagline);
+      formData.append("description", data.description);
+      formData.append("thumbnail", file);
+
+      await mutateAsync(formData);
+      navigate("/manager/courses"); 
+      setIsLoading(false);
+    } catch (error) {
+      console.log(error);
+      setIsLoading(false);
+    }
+  });
 
   return (
     <>
@@ -60,7 +92,6 @@ const ManageCreateCoursePage = () => {
             <input
               {...register("name")}
               type="text"
-              name="title"
               id="title"
               className="appearance-none outline-none w-full py-3 font-semibold placeholder:font-normal placeholder:text-[#838C9D] !bg-transparent"
               placeholder="Write better name for your course"
@@ -117,7 +148,6 @@ const ManageCreateCoursePage = () => {
               }
             }}
             type="file"
-            name="thumbnail"
             id="thumbnail"
             accept="image/*"
             className="absolute bottom-0 left-1/4 -z-10"
@@ -141,7 +171,6 @@ const ManageCreateCoursePage = () => {
             <input
               {...register("tagline")}
               type="text"
-              name="tagline"
               id="tagline"
               className="appearance-none outline-none w-full py-3 font-semibold placeholder:font-normal placeholder:text-[#838C9D] !bg-transparent"
               placeholder="Write tagline for better copy"
@@ -165,7 +194,6 @@ const ManageCreateCoursePage = () => {
             />
             <select
               {...register("categoryId")}
-              name="category"
               id="category"
               className="appearance-none outline-none w-full py-3 px-2 -mx-2 font-semibold placeholder:font-normal placeholder:text-[#838C9D] !bg-transparent"
             >
@@ -202,7 +230,6 @@ const ManageCreateCoursePage = () => {
             />
             <textarea
               {...register("description")}
-              name="desc"
               id="desc"
               rows={5}
               className="appearance-none outline-none w-full font-semibold placeholder:font-normal placeholder:text-[#838C9D] !bg-transparent"
@@ -225,9 +252,10 @@ const ManageCreateCoursePage = () => {
           </button>
           <button
             type="submit"
+            disabled={isLoading}
             className="w-full rounded-full p-[14px_20px] font-semibold text-[#FFFFFF] bg-[#662FFF] text-nowrap"
           >
-            Create Now
+            {isLoading ? "Creating..." : "Create Now"}
           </button>
         </div>
       </form>

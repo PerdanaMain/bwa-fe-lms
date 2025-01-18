@@ -11,3 +11,14 @@ export const getCourses = async (token) =>
 
 export const getCategories = async () =>
   await apiInstance.get("/categories").then((res) => res.data);
+
+export const createCourse = async (data, token) => {
+  await apiInstance
+    .post("/courses", data, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then((res) => res.data);
+};
