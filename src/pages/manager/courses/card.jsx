@@ -1,5 +1,8 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
+import Swal from "sweetalert2";
+import { useMutation } from "@tanstack/react-query";
+import { deleteCourse } from "../../../services/courseService";
 
 const CardCourse = ({
   id = 1,
@@ -8,6 +11,38 @@ const CardCourse = ({
   totalStudents = 554,
   category = "Programming",
 }) => {
+  const navigate = useNavigate();
+
+  const { mutateAsync } = useMutation({
+    mutationFn: () => deleteCourse(id),
+  });
+
+  const handleDelete = async () => {
+    try {
+      Swal.fire({
+        title: "Deletion Confirmation!",
+        text: "The course will be deleted permanently! " + id,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          await mutateAsync();
+          navigate("/manager/courses");
+        }
+      });
+    } catch (error) {
+      console.log(error);
+      Swal.fire({
+        title: "Error!",
+        text: error?.message,
+        icon: "error",
+      });
+    }
+  };
+
   return (
     <div className="card flex items-center gap-5">
       <div className="flex shrink-0 w-[140px] h-[110px] rounded-[20px] bg-[#D9D9D9] overflow-hidden">
@@ -41,8 +76,15 @@ const CardCourse = ({
         </div>
       </div>
       <div className="flex justify-end items-center gap-3">
+        <button
+          type="button"
+          onClick={handleDelete}
+          className="w-fit rounded-full border bg-red-500 text-white border-[#060A23] p-[14px_20px] font-semibold text-nowrap"
+        >
+          Delete
+        </button>
         <Link
-          to={`/manager/courses/${id}`}
+          to={`/manager/courses/edit/${id}`}
           className="w-fit rounded-full border border-[#060A23] p-[14px_20px] font-semibold text-nowrap"
         >
           Manage

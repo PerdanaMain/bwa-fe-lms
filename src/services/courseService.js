@@ -1,4 +1,6 @@
 import apiInstance from "../utils/axios";
+import secureLocalStorage from "react-secure-storage";
+import { STORAGE_KEY } from "../utils/const";
 
 export const getCourses = async (token) =>
   await apiInstance
@@ -37,6 +39,19 @@ export const updateCourse = async (id, data, token) => {
     .put(`/courses/${id}`, data, {
       headers: {
         "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then((res) => res.data);
+};
+
+export const deleteCourse = async (id) => {
+  const session = secureLocalStorage.getItem(STORAGE_KEY);
+  const token = session.token;
+
+  await apiInstance
+    .delete(`/courses/${id}`, {
+      headers: {
         Authorization: `Bearer ${token}`,
       },
     })
