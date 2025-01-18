@@ -1,57 +1,78 @@
-import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
-import { useLoaderData } from "react-router-dom"; 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { createCourseSchema } from "../../../utils/zodSchema";
-import { useState, useRef } from "react";
 import { useMutation } from "@tanstack/react-query";
-import { STORAGE_KEY } from "../../../utils/const";
-import { createCourse } from "../../../services/courseService";
-import { useNavigate } from "react-router-dom";
+import { useRef, useState } from "react";
+import { useForm } from "react-hook-form";
+import { Link, useLoaderData, useNavigate, useParams } from "react-router-dom";
 import secureLocalStorage from "react-secure-storage";
+import Swal from "sweetalert2";
+import { createCourse, updateCourse } from "../../../services/courseService";
+import { STORAGE_KEY } from "../../../utils/const";
+import {
+  createCourseSchema,
+  updateCourseSchema,
+} from "../../../utils/zodSchema";
 
 const ManageCreateCoursePage = () => {
   const data = useLoaderData();
+  const { id } = useParams();
   const session = secureLocalStorage.getItem(STORAGE_KEY);
   const token = session.token;
   const navigate = useNavigate();
 
   const [isLoading, setIsLoading] = useState(false);
 
-
   const {
     register,
     handleSubmit,
     formState: { errors },
     setValue,
-  } = useForm({ 
-    resolver: zodResolver(createCourseSchema),
+  } = useForm({
+    resolver: zodResolver(
+      data?.course === null ? createCourseSchema : updateCourseSchema
+    ),
+    defaultValues: {
+      name: data?.course?.name,
+      tagline: data?.course?.tagline,
+      description: data?.course?.description,
+      categoryId: data?.course?.category._id,
+      thumbnail: data?.course?.thumbnailUrl,
+    },
   });
-
-
 
   const [file, setFile] = useState(null);
   const inputFileRef = useRef(null);
-  const {  mutateAsync } = useMutation({
+  const mutateCreate = useMutation({
     mutationFn: (data) => createCourse(data, token),
   });
+  const mutateUpdate = useMutation({
+    mutationFn: (data) => updateCourse(id, data, token),
+  });
 
-  const onSubmit = handleSubmit(async (data) => {
+  const onSubmit = handleSubmit(async (values) => {
     try {
       setIsLoading(true);
 
       const formData = new FormData();
-      formData.append("name", data.name);
-      formData.append("categoryId", data.categoryId);
-      formData.append("tagline", data.tagline);
-      formData.append("description", data.description);
+      formData.append("name", values?.name);
+      formData.append("categoryId", values?.categoryId);
+      formData.append("tagline", values?.tagline);
+      formData.append("description", values?.description);
       formData.append("thumbnail", file);
 
-      await mutateAsync(formData);
-      navigate("/manager/courses"); 
+      if (data?.course === null) {
+        await mutateCreate.mutateAsync(formData);
+      } else {
+        await mutateUpdate.mutateAsync(formData);
+      }
+
+      navigate("/manager/courses");
       setIsLoading(false);
     } catch (error) {
-      console.log(error);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: error?.response?.data?.message,
+      });
       setIsLoading(false);
     }
   });
@@ -61,9 +82,13 @@ const ManageCreateCoursePage = () => {
       <header className="flex items-center justify-between gap-[30px]">
         <div>
           <h1 className="font-extrabold text-[28px] leading-[42px]">
-            New Course
+            {data?.course === null ? "New Course" : "Edit Course"}
           </h1>
-          <p className="text-[#838C9D] mt-[1]">Create new future for company</p>
+          <p className="text-[#838C9D] mt-[1]">
+            {data?.course === null
+              ? "Create new future for company"
+              : "Edit your course"}
+          </p>
         </div>
         <div className="flex items-center gap-3">
           <Link
@@ -127,7 +152,9 @@ const ManageCreateCoursePage = () => {
             <img
               id="thumbnail-preview"
               src={file ? URL.createObjectURL(file) : ""}
-              className={`w-full h-full object-cover ${file ? "block" : "hidden"}`}
+              className={`w-full h-full object-cover ${
+                file ? "block" : "hidden"
+              }`}
               alt="thumbnail"
             />
             <button
@@ -154,10 +181,10 @@ const ManageCreateCoursePage = () => {
           />
         </div>
         {errors?.thumbnail && (
-            <span className="error-message text-[#FF435A]">
-              {errors?.thumbnail?.message}
-            </span>
-          )}
+          <span className="error-message text-[#FF435A]">
+            {errors?.thumbnail?.message}
+          </span>
+        )}
         <div className="flex flex-col gap-[10px]">
           <label htmlFor="tagline" className="font-semibold">
             Course Tagline

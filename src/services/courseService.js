@@ -31,3 +31,14 @@ export const createCourse = async (data, token) => {
     })
     .then((res) => res.data);
 };
+
+export const updateCourse = async (id, data, token) => {
+  await apiInstance
+    .put(`/courses/${id}`, data, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then((res) => res.data);
+};
