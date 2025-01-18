@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useLoaderData } from "react-router-dom"; 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createCourseSchema } from "../../../utils/zodSchema";
+import { useState, useRef } from "react";
 
 const ManageCreateCoursePage = () => {
   const categories = useLoaderData();
@@ -12,13 +13,16 @@ const ManageCreateCoursePage = () => {
     handleSubmit,
     formState: { errors },
     setValue,
-  } = useForm({
+  } = useForm({ 
     resolver: zodResolver(createCourseSchema),
   });
 
   const onSubmit = handleSubmit((data) => {
     console.log(data);
   });
+
+  const [file, setFile] = useState(null);
+  const inputFileRef = useRef(null);
 
   return (
     <>
@@ -77,6 +81,7 @@ const ManageCreateCoursePage = () => {
             className="relative flex shrink-0 w-full h-[200px] rounded-[20px] border border-[#CFDBEF] overflow-hidden"
           >
             <button
+              onClick={() => inputFileRef?.current?.click()}
               type="button"
               id="trigger-input"
               className="absolute top-0 left-0 w-full h-full flex justify-center items-center gap-3 z-0"
@@ -90,8 +95,8 @@ const ManageCreateCoursePage = () => {
             </button>
             <img
               id="thumbnail-preview"
-              src=""
-              className="w-full h-full object-cover hidden"
+              src={file ? URL.createObjectURL(file) : ""}
+              className={`w-full h-full object-cover ${file ? "block" : "hidden"}`}
               alt="thumbnail"
             />
             <button
@@ -104,6 +109,13 @@ const ManageCreateCoursePage = () => {
           </div>
           <input
             {...register("thumbnail")}
+            ref={inputFileRef}
+            onChange={(e) => {
+              if (e.target.files[0]) {
+                setFile(e.target.files[0]);
+                setValue("thumbnail", e.target.files[0]);
+              }
+            }}
             type="file"
             name="thumbnail"
             id="thumbnail"
