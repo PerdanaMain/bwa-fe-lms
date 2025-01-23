@@ -25,3 +25,11 @@ export const createCourseSchema = z.object({
 export const updateCourseSchema = createCourseSchema.extend({
   thumbnail: z.any().optional(),
 });
+
+export const mutateContentSchema = z.object({
+  title: z.string().min(5),
+  type: z.string().min(5),
+  youtubeId: z.string().min(5).optional(),
+  text: z.string().optional(),
+  courseId: z.string().min(5),
+});

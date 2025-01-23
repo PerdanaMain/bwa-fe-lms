@@ -1,4 +1,5 @@
 import { CKEditor } from "@ckeditor/ckeditor5-react";
+import { zodResolver } from "@hookform/resolvers/zod";
 import {
   ClassicEditor,
   Bold,
@@ -16,8 +17,22 @@ import {
 } from "ckeditor5";
 
 import "ckeditor5/ckeditor5.css";
+import { useForm } from "react-hook-form";
+import { mutateContentSchema } from "../../../utils/zodSchema";
 
 const ManageContentCreatePage = () => {
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(mutateContentSchema),
+  });
+
+  const onSubmit = (values) => {
+    console.log(values);
+  };
   return (
     <>
       <div
@@ -54,8 +69,8 @@ const ManageContentCreatePage = () => {
         </div>
       </header>
       <form
-        action="manage-course-materi.html"
         className="flex flex-col w-[930px] rounded-[30px] p-[30px] gap-[30px] bg-[#F8FAFB]"
+        onSubmit={handleSubmit(onSubmit)}
       >
         <div className="flex flex-col gap-[10px]">
           <label htmlFor="title" className="font-semibold">
@@ -68,14 +83,18 @@ const ManageContentCreatePage = () => {
               alt="icon"
             />
             <input
+              {...register("title")}
               type="text"
-              name="title"
               id="title"
               className="appearance-none outline-none w-full py-3 font-semibold placeholder:font-normal placeholder:text-[#838C9D] !bg-transparent"
               placeholder="Write better name for your course"
-              required=""
             />
           </div>
+          {errors?.title && (
+            <span className="error-message text-[#FF435A]">
+              {errors?.title?.message}
+            </span>
+          )}
         </div>
         <div className="flex flex-col gap-[10px]">
           <label htmlFor="type" className="font-semibold">
@@ -88,16 +107,15 @@ const ManageContentCreatePage = () => {
               alt="icon"
             />
             <select
-              name="type"
+              {...register("type")}
               id="type"
               className="appearance-none outline-none w-full py-3 px-2 -mx-2 font-semibold placeholder:font-normal placeholder:text-[#838C9D] !bg-transparent"
             >
               <option value="" hidden="">
                 Choose content type
               </option>
-              <option value="">test</option>
-              <option value="">test</option>
-              <option value="">test</option>
+              <option value="video">Video</option>
+              <option value="text">Text</option>
             </select>
             <img
               src="/assets/images/icons/arrow-down.svg"
@@ -105,6 +123,11 @@ const ManageContentCreatePage = () => {
               alt="icon"
             />
           </div>
+          {errors?.type && (
+            <span className="error-message text-[#FF435A]">
+              {errors?.type?.message}
+            </span>
+          )}
         </div>
         <div className="flex flex-col gap-[10px]">
           <label htmlFor="video" className="font-semibold">
@@ -117,13 +140,18 @@ const ManageContentCreatePage = () => {
               alt="icon"
             />
             <input
+              {...register("youtubeId")}
               type="text"
-              name="video"
               id="video"
               className="appearance-none outline-none w-full py-3 font-semibold placeholder:font-normal placeholder:text-[#838C9D] !bg-transparent"
               placeholder="Write tagline for better copy"
             />
           </div>
+          {errors?.youtubeId && (
+            <span className="error-message text-[#FF435A]">
+              {errors?.youtubeId?.message}
+            </span>
+          )}
         </div>
 
         <div className="flex flex-col gap-[10px]">
@@ -166,11 +194,20 @@ const ManageContentCreatePage = () => {
               ],
               initialData: "<h1>Hello from CKEditor 5!</h1>",
             }}
+            onChange={(event, editor) => {
+              const data = editor.getData();
+              setValue("text", data);
+            }}
           />
+          {errors?.text && (
+            <span className="error-message text-[#FF435A]">
+              {errors?.text?.message}
+            </span>
+          )}
         </div>
         <div className="flex items-center gap-[14px]">
           <button
-            type="submit"
+            type="button"
             className="w-full rounded-full border border-[#060A23] p-[14px_20px] font-semibold text-nowrap"
           >
             Save as Draft
