@@ -13,7 +13,11 @@ import ManageStudentsPage from "../pages/manager/students";
 import StudentPage from "../pages/student";
 import secureLocalStorage from "react-secure-storage";
 import { MANAGER_SESSION, STORAGE_KEY } from "../utils/const";
-import { getCourses, getCategories, getCourseById } from "../services/courseService";
+import {
+  getCourses,
+  getCategories,
+  getCourseById,
+} from "../services/courseService";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -40,7 +44,7 @@ const router = createBrowserRouter([
       if (!session || !session.role) {
         throw redirect("/manager/sign-in");
       }
-      return session
+      return session;
     },
     element: <LayoutDashboard />,
     children: [
@@ -63,7 +67,7 @@ const router = createBrowserRouter([
         path: "/manager/courses/create",
         loader: async () => {
           const categories = await getCategories();
-          return {categories, course: null};
+          return { categories, course: null };
         },
         element: <ManageCreateCoursePage />,
       },
@@ -82,6 +86,13 @@ const router = createBrowserRouter([
       },
       {
         path: "/manager/courses/:id",
+        loader: async ({ params }) => {
+          const session = secureLocalStorage.getItem(STORAGE_KEY);
+          const token = session.token;
+
+          const course = await getCourseById(params?.id, token);
+          return course?.data;
+        },
         element: <ManageCourseDetailPage />,
       },
       {
