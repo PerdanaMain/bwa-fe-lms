@@ -4,7 +4,6 @@ import { useLoaderData } from "react-router-dom";
 const ManageCourseDetailPage = () => {
   const { id } = useParams();
   const course = useLoaderData();
-  console.log(course);
   return (
     <>
       <div
@@ -88,7 +87,7 @@ const ManageCourseDetailPage = () => {
           </div>
         </div>
       </section>
-      <TableContent />
+      <TableContent details={course?.details} courseId={course?._id} />
     </>
   );
 };

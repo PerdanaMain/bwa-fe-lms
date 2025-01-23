@@ -2,11 +2,11 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
 const ContentItem = ({
-  id = 1,
+  id = "1",
   index = 1,
   type = "video",
   title = "Install VSCode di Windows",
-  courseId = 2,
+  courseId = "2",
 }) => {
   return (
     <div className="card flex items-center gap-5">
@@ -23,17 +23,19 @@ const ContentItem = ({
         </div>
       </div>
       <div className="w-full">
-        <h3 className="font-bold text-xl leading-[30px] line-clamp-1">
+        <h3 className="font-bold text-xl leading-[30px] line-clamp-1 capitalize">
           {title}
         </h3>
         <div className="flex items-center gap-5">
           <div className="flex items-center gap-[6px] mt-[6px]">
             <img
-              src="/assets/images/icons/note-favorite-purple.svg"
+              src={`/assets/images/icons/${
+                type == "video" ? "video-play-purple" : "note-favorite-purple"
+              }.svg`}
               className="w-5 h-5"
               alt="icon"
             />
-            <p className="text-[#838C9D]">{type}</p>
+            <p className="text-[#838C9D] capitalize">{type}</p>
           </div>
         </div>
       </div>
@@ -56,11 +58,11 @@ const ContentItem = ({
 };
 
 ContentItem.propTypes = {
-  id: PropTypes.number,
+  id: PropTypes.string,
   index: PropTypes.number,
   type: PropTypes.string,
   title: PropTypes.string,
-  courseId: PropTypes.number,
+  courseId: PropTypes.string,
 };
 
 export default ContentItem;
