@@ -19,8 +19,20 @@ import {
 import "ckeditor5/ckeditor5.css";
 import { useForm } from "react-hook-form";
 import { mutateContentSchema } from "../../../utils/zodSchema";
-
+import { useMutation } from "@tanstack/react-query";
+import { createCourseContent } from "../../../services/courseService";
+import { STORAGE_KEY } from "../../../utils/const";
+import { useNavigate, useParams } from "react-router-dom";
+import { useState } from "react";
+import Swal from "sweetalert2";
+import secureLocalStorage from "react-secure-storage";
 const ManageContentCreatePage = () => {
+  const session = secureLocalStorage.getItem(STORAGE_KEY);
+  const token = session.token;
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -33,8 +45,28 @@ const ManageContentCreatePage = () => {
 
   const type = watch("type");
 
-  const onSubmit = (values) => {
-    console.log(values);
+  const { mutateAsync } = useMutation({
+    mutationFn: (data) => createCourseContent(data, token),
+  });
+
+  const onSubmit = async (values) => {
+    try {
+      setIsLoading(true);
+      await mutateAsync({
+        ...values,
+        courseId: id,
+      });
+      navigate(`/manager/courses/${id}`);
+    } catch (error) {
+      console.log(error);
+      Swal.fire({
+        title: "Error",
+        text: error.message,
+        icon: "error",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
   return (
     <>
@@ -220,9 +252,10 @@ const ManageContentCreatePage = () => {
           </button>
           <button
             type="submit"
+            disabled={isLoading}
             className="w-full rounded-full p-[14px_20px] font-semibold text-[#FFFFFF] bg-[#662FFF] text-nowrap"
           >
-            Add Content Now
+            {isLoading ? "Loading..." : "Add Content Now"}
           </button>
         </div>
       </form>

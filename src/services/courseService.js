@@ -57,3 +57,13 @@ export const deleteCourse = async (id) => {
     })
     .then((res) => res.data);
 };
+
+export const createCourseContent = async (data, token) => {
+  await apiInstance
+    .post("/courses/content", data, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then((res) => res.data);
+};
