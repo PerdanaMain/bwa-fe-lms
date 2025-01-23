@@ -67,3 +67,12 @@ export const createCourseContent = async (data, token) => {
     })
     .then((res) => res.data);
 };
+
+export const getContentCourse = async (id, token) =>
+  await apiInstance
+    .get(`/courses/content/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then((res) => res.data);

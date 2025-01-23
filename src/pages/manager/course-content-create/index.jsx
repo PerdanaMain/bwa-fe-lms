@@ -1,8 +1,8 @@
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
-  ClassicEditor,
   Bold,
+  ClassicEditor,
   Essentials,
   Heading,
   Indent,
@@ -16,16 +16,16 @@ import {
   Undo,
 } from "ckeditor5";
 
-import "ckeditor5/ckeditor5.css";
-import { useForm } from "react-hook-form";
-import { mutateContentSchema } from "../../../utils/zodSchema";
 import { useMutation } from "@tanstack/react-query";
+import "ckeditor5/ckeditor5.css";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { useLoaderData, useNavigate, useParams } from "react-router-dom";
+import secureLocalStorage from "react-secure-storage";
+import Swal from "sweetalert2";
 import { createCourseContent } from "../../../services/courseService";
 import { STORAGE_KEY } from "../../../utils/const";
-import { useNavigate, useParams } from "react-router-dom";
-import { useState } from "react";
-import Swal from "sweetalert2";
-import secureLocalStorage from "react-secure-storage";
+import { mutateContentSchema } from "../../../utils/zodSchema";
 const ManageContentCreatePage = () => {
   const session = secureLocalStorage.getItem(STORAGE_KEY);
   const token = session.token;
@@ -33,6 +33,8 @@ const ManageContentCreatePage = () => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
 
+  const content = useLoaderData();
+  console.log(content);
   const {
     register,
     handleSubmit,
@@ -95,7 +97,7 @@ const ManageContentCreatePage = () => {
           </div>
           <div>
             <h1 className="font-extrabold text-[28px] leading-[42px]">
-              Add Content
+              {content == undefined ? "Add Content" : "Edit Content"}
             </h1>
             <p className="text-[#838C9D] mt-[1]">
               Give a best content for the course

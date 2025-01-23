@@ -17,6 +17,7 @@ import {
   getCourses,
   getCategories,
   getCourseById,
+  getContentCourse,
 } from "../services/courseService";
 const router = createBrowserRouter([
   {
@@ -97,6 +98,18 @@ const router = createBrowserRouter([
       },
       {
         path: "/manager/courses/:id/create",
+        element: <ManageContentCreatePage />,
+      },
+      {
+        path: "/manager/courses/:id/edit/:contentId",
+        loader: async ({ params }) => {
+          const session = secureLocalStorage.getItem(STORAGE_KEY);
+          const token = session.token;
+
+          const content = await getContentCourse(params?.contentId, token);
+          console.log(content);
+          return content?.data;
+        },
         element: <ManageContentCreatePage />,
       },
       {
