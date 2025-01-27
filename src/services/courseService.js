@@ -78,9 +78,6 @@ export const getContentCourse = async (id, token) =>
     .then((res) => res.data);
 
 export const updateCourseContent = async (data, token, id) => {
-  console.log(data);
-  console.log(id);
-  console.log(token);
   await apiInstance
     .put(`/courses/content/${id}`, data, {
       headers: {
@@ -89,3 +86,12 @@ export const updateCourseContent = async (data, token, id) => {
     })
     .then((res) => res.data);
 };
+
+export const deleteCourseContent = async (id, token) =>
+  await apiInstance
+    .delete(`/courses/content/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then((res) => res.data);

@@ -1,5 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, useRevalidator } from "react-router-dom";
 import PropTypes from "prop-types";
+import { useMutation } from "@tanstack/react-query";
+import { deleteCourseContent } from "../../../services/courseService";
+import secureLocalStorage from "react-secure-storage";
+import { STORAGE_KEY } from "../../../utils/const";
+import { useState } from "react";
+import Swal from "sweetalert2";
 
 const ContentItem = ({
   id = "1",
@@ -8,6 +14,33 @@ const ContentItem = ({
   title = "Install VSCode di Windows",
   courseId = "2",
 }) => {
+  const session = secureLocalStorage.getItem(STORAGE_KEY);
+  const token = session.token;
+  const [isLoading, setIsLoading] = useState(false);
+
+  const { mutateAsync } = useMutation({
+    mutationFn: () => deleteCourseContent(id, token),
+  });
+
+  const revalidator = useRevalidator();
+
+  const handleDelete = async () => {
+    try {
+      setIsLoading(true);
+
+      await mutateAsync();
+
+      revalidator.revalidate();
+    } catch (error) {
+      setIsLoading(false);
+      Swal.fire({
+        text: error?.message,
+        icon: "error",
+        title: "Error While deleting content",
+      });
+    }
+  };
+
   return (
     <div className="card flex items-center gap-5">
       <div className="relative flex shrink-0 w-[140px] h-[110px] ">
@@ -48,9 +81,11 @@ const ContentItem = ({
         </Link>
         <button
           type="button"
+          disabled={isLoading}
           className="w-fit rounded-full p-[14px_20px] bg-[#FF435A] font-semibold text-white text-nowrap"
+          onClick={handleDelete}
         >
-          Delete
+          {isLoading ? "Deleting..." : "Delete"}
         </button>
       </div>
     </div>
