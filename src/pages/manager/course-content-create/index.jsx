@@ -23,18 +23,20 @@ import { useForm } from "react-hook-form";
 import { useLoaderData, useNavigate, useParams } from "react-router-dom";
 import secureLocalStorage from "react-secure-storage";
 import Swal from "sweetalert2";
-import { createCourseContent } from "../../../services/courseService";
+import {
+  createCourseContent,
+  updateCourseContent,
+} from "../../../services/courseService";
 import { STORAGE_KEY } from "../../../utils/const";
 import { mutateContentSchema } from "../../../utils/zodSchema";
 const ManageContentCreatePage = () => {
   const session = secureLocalStorage.getItem(STORAGE_KEY);
   const token = session.token;
-  const { id } = useParams();
+  const { id, contentId } = useParams();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
 
   const content = useLoaderData();
-  console.log(content);
   const {
     register,
     handleSubmit,
@@ -43,6 +45,12 @@ const ManageContentCreatePage = () => {
     watch,
   } = useForm({
     resolver: zodResolver(mutateContentSchema),
+    defaultValues: {
+      title: content?.title,
+      type: content?.type,
+      youtubeId: content?.youtubeId,
+      text: content?.text,
+    },
   });
 
   const type = watch("type");
@@ -51,13 +59,24 @@ const ManageContentCreatePage = () => {
     mutationFn: (data) => createCourseContent(data, token),
   });
 
+  const { mutateAsync: mutateUpdate } = useMutation({
+    mutationFn: (data) => updateCourseContent(data, token, contentId),
+  });
+
   const onSubmit = async (values) => {
     try {
       setIsLoading(true);
-      await mutateAsync({
-        ...values,
-        courseId: id,
-      });
+      if (content === undefined) {
+        await mutateAsync({
+          ...values,
+          courseId: id,
+        });
+      } else {
+        await mutateUpdate({
+          ...values,
+          courseId: id,
+        });
+      }
       navigate(`/manager/courses/${id}`);
     } catch (error) {
       console.log(error);
@@ -83,7 +102,7 @@ const ManageContentCreatePage = () => {
           Course
         </span>
         <span className="last-of-type:after:content-[''] last-of-type:font-semibold">
-          Add Content
+          {content == undefined ? "Add Content" : "Edit Content"}
         </span>
       </div>
       <header className="flex items-center justify-between gap-[30px]">
@@ -233,6 +252,7 @@ const ManageContentCreatePage = () => {
                   Undo,
                 ],
               }}
+              data={content?.text}
               onChange={(event, editor) => {
                 const data = editor.getData();
                 setValue("text", data);
@@ -257,7 +277,11 @@ const ManageContentCreatePage = () => {
             disabled={isLoading}
             className="w-full rounded-full p-[14px_20px] font-semibold text-[#FFFFFF] bg-[#662FFF] text-nowrap"
           >
-            {isLoading ? "Loading..." : "Add Content Now"}
+            {isLoading
+              ? "Loading..."
+              : content
+              ? "Update Content"
+              : "Add Content Now"}
           </button>
         </div>
       </form>

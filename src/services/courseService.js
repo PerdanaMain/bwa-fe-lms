@@ -76,3 +76,16 @@ export const getContentCourse = async (id, token) =>
       },
     })
     .then((res) => res.data);
+
+export const updateCourseContent = async (data, token, id) => {
+  console.log(data);
+  console.log(id);
+  console.log(token);
+  await apiInstance
+    .put(`/courses/content/${id}`, data, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then((res) => res.data);
+};
