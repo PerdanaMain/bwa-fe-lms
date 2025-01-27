@@ -14,9 +14,9 @@ export const getCourses = async (token) =>
 export const getCategories = async () =>
   await apiInstance.get("/categories").then((res) => res.data);
 
-export const getCourseById = async (id, token) =>
+export const getCourseById = async (id, isPreview = false, token) =>
   await apiInstance
-    .get(`/courses/${id}`, {
+    .get(`/courses/${id}${isPreview ? "?preview=true" : ""}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

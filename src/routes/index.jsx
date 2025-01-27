@@ -91,7 +91,7 @@ const router = createBrowserRouter([
           const session = secureLocalStorage.getItem(STORAGE_KEY);
           const token = session.token;
 
-          const course = await getCourseById(params?.id, token);
+          const course = await getCourseById(params?.id, false, token);
           return course?.data;
         },
         element: <ManageCourseDetailPage />,
@@ -107,13 +107,19 @@ const router = createBrowserRouter([
           const token = session.token;
 
           const content = await getContentCourse(params?.contentId, token);
-          console.log(content);
           return content?.data;
         },
         element: <ManageContentCreatePage />,
       },
       {
         path: "/manager/courses/:id/preview",
+        loader: async ({ params }) => {
+          const session = secureLocalStorage.getItem(STORAGE_KEY);
+          const token = session.token;
+
+          const course = await getCourseById(params.id, true, token);
+          return course?.data;
+        },
         element: <ManageCoursePreviewPage />,
       },
       {
