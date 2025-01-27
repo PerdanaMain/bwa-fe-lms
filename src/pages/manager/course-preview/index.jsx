@@ -1,11 +1,26 @@
 import { Link, useLoaderData, useParams } from "react-router-dom";
 import ContentText from "./content-text";
 import ContentVideo from "./content-video";
+import { useState } from "react";
 
 const ManageCoursePreviewPage = () => {
   const course = useLoaderData();
   const { id } = useParams();
 
+  const [activteContent, setActiveContent] = useState(course?.details[0]);
+  const handleChangeContent = (content) => {
+    setActiveContent(content);
+  };
+
+  const handleNextContent = (content) => {
+    const currIndex = course?.details?.findIndex(
+      (val) => val?._id === content?._id
+    );
+
+    if (currIndex < course?.details?.length - 1) {
+      handleChangeContent(course?.details[currIndex + 1]);
+    }
+  };
   return (
     <div className="flex min-h-screen">
       <aside className="sidebar-container fixed h-[calc(100vh-20px)] w-full max-w-[330px] my-[10px] ml-[10px] bg-[#060A23] overflow-hidden flex flex-1 rounded-[20px]">
@@ -32,7 +47,11 @@ const ManageCoursePreviewPage = () => {
             <ul className="flex flex-col gap-4">
               {course?.details.map((item, index) => (
                 <li key={index}>
-                  <button type="button" className="w-full text-left">
+                  <button
+                    type="button"
+                    className="w-full text-left"
+                    onClick={() => handleChangeContent(item)}
+                  >
                     <div className="flex items-center gap-3 w-full rounded-full border p-[14px_20px] transition-all duration-300 hover:bg-[#662FFF] hover:border-[#8661EE] hover:shadow-[-10px_-6px_10px_0_#7F33FF_inset] bg-[#070B24] border-[#24283E] shadow-[-10px_-6px_10px_0_#181A35_inset]">
                       <img
                         src={`/assets/images/icons/${
@@ -116,8 +135,17 @@ const ManageCoursePreviewPage = () => {
           </div>
         </div>
         <div className="relative flex flex-col gap-[26px]">
-          <ContentText />
-          <ContentVideo />
+          {activteContent?.type == "text" ? (
+            <ContentText
+              content={activteContent}
+              handleNext={handleNextContent}
+            />
+          ) : (
+            <ContentVideo
+              content={activteContent}
+              handleNext={handleNextContent}
+            />
+          )}
         </div>
       </main>
     </div>
