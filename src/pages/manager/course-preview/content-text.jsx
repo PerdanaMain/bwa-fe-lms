@@ -10,6 +10,7 @@ const ContentText = ({ content, handleNext }) => {
         <article
           id="Content-wrapper"
           dangerouslySetInnerHTML={{ __html: content?.text }}
+          className="prose"
         />
       </div>
       <div className="fixed bottom-0 w-[calc(100%-400px)] h-[151px] flex items-end justify-end pb-5 bg-[linear-gradient(0deg,#FFFFFF_49.67%,rgba(255,255,255,0)_84.11%)]">
